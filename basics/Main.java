@@ -19,18 +19,14 @@ public class Main {
   }
 
   public static String pluralize(String nameOfThing, int countOfThing) {
-    if (countOfThing == 1) {
-      return nameOfThing;
-    } else {
-      return nameOfThing + "s";
-    }
+    return nameOfThing + (countOfThing == 1 ? "" : "s");
   }
 
   public static String flipNHeads(int n) {
     int numberOfHeadsInARow = 0;
     int numberOfFlips = 0;
 
-    while (numberOfHeadsInARow != n) {
+    while (numberOfHeadsInARow < n) {
       numberOfFlips++;
 
       double headsOrTails = Math.random();
@@ -39,18 +35,16 @@ public class Main {
         numberOfHeadsInARow++;
         System.out.println("heads");
 
-        if (numberOfHeadsInARow == n) {
-          String message = "It took " + numberOfFlips + " " + pluralize("flip", numberOfFlips) + " to flip " + n + " "
-              + pluralize("head", n) + " in a row.";
-          return message;
-        }
       } else {
         numberOfHeadsInARow = 0;
         System.out.println("tails");
       }
     }
+    String message = "It took " + numberOfFlips + " " + pluralize("flip", numberOfFlips) + " to flip " + n + " "
+        + pluralize("head", n) + " in a row.";
 
-    return "Please select an integer greater than 0.";
+    return message;
+
   }
 
   public static void clock() {
@@ -64,13 +58,17 @@ public class Main {
 
       if (currentSecond != second) {
         currentSecond = second;
-        if ((second >= 0) && (second < 10)) {
-          String formattedSecond = "0" + String.valueOf(second);
-          System.out.println(hour + ":" + minute + ":" + formattedSecond);
-        } else {
-          System.out.println(hour + ":" + minute + ":" + second);
-        }
+
+        System.out.println(hour + ":" + padNumbers(minute) + ":" + padNumbers(second));
       }
     }
+  }
+
+  public static String padNumbers(int number) {
+    String formattedNumber = String.valueOf(number);
+    if (number < 10) {
+      formattedNumber = "0" + formattedNumber;
+    }
+    return formattedNumber;
   }
 }
