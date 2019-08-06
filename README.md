@@ -11,5 +11,5 @@
 
 ## RESOURCES:
 * -- Classmates: Marisha Hoza, bonmibear(Jackie ??)
-* -- [Documentation] (https://www.geeksforgeeks.org/java-math-random-method-examples/)
+* -- [Documentation](https://www.geeksforgeeks.org/java-math-random-method-examples/)
 
