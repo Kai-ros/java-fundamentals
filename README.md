@@ -8,6 +8,7 @@
 * ------ `pluralize()`
 * ------ `flipNHeads()`
 * ------ `clock()`
+* ------ `padNumbers()`
 
 ## RESOURCES:
 * -- Classmates: Marisha Hoza, bonmibear(Jackie ??)
