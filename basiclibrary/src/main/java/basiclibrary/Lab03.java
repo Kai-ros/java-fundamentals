@@ -4,7 +4,6 @@ import java.util.*;
 
 public class Lab03 {
 
-
     public static String hashSet(int[][] averageTemperaturesArray) {
 
         // Create hash set.
@@ -64,9 +63,7 @@ public class Lab03 {
         return outputMessage.toString();
     }
 
-
 }
-
 
 
 // Learning Resources:

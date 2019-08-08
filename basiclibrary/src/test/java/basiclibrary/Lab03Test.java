@@ -25,7 +25,6 @@ public class Lab03Test {
             {65, 56, 55, 52, 55, 62, 57}
     };
 
-
     // Tally test cases.
     List<String> testListHappyPath = new ArrayList<>();
     List<String> testListEmpty = new ArrayList<>();
