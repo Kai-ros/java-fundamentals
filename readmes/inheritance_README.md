@@ -1,0 +1,42 @@
+## FILE STRUCTURE:
+* -- `inheritance`
+* ---- `src`
+* ------ `main`
+* -------- `java`
+* ---------- `inheritance`
+* ------------ `Restaurant.java`
+* -------------- `Restaurant()`
+* -------------- `Restaurant()`
+* -------------- `getName()`
+* -------------- `getStars()`
+* -------------- `getPriceCategory()`
+* -------------- `setName()`
+* -------------- `setStars()`
+* -------------- `setPriceCategory()`
+* -------------- `addReview()`
+* -------------- `toString()`
+* ------------ `Review.java`
+* -------------- `Review()`
+* -------------- `Review()`
+* -------------- `getBody()`
+* -------------- `getAuthor()`
+* -------------- `getStars()`
+* -------------- `getRestaurantName()`
+* -------------- `setBody()`
+* -------------- `setAuthor()`
+* -------------- `setStars()`
+* -------------- `setRestaurant()`
+* -------------- `toString()`
+* ------ `test`
+* -------- `java`
+* ---------- `inheritance`
+* ------------ `LibraryTest.java`
+* -------------- `initializeTestData()`
+* -------------- `testRestaurant()`
+* -------------- `testRestaurant_ToString()`
+* -------------- `testRestaurant_AddReview()`
+* -------------- `testReview()`
+* -------------- `testReview_ToString()`
+
+## RESOURCES:
+* -- Classmates: Kevin Couture, Marisha Hoza, Jack Kinne
