@@ -18,13 +18,13 @@ public class LibraryTest
     public void initializeTestData()
     {
         String testName = "TEST RESTAURANT";
-        int testStarsRestaurant = 4;
+        double testStarsRestaurant = 4;
         int testPriceCategory = 3;
         testRestaurant = new Restaurant(testName, testStarsRestaurant, testPriceCategory);
 
-        testReview1 = new Review("TEST BODY 1", "Test Author 1", 4);
-        testReview2 = new Review("TEST BODY 2", "Test Author 2", 3);
-        testReview3 = new Review("TEST BODY 3", "Test Author 3", 2);
+        testReview1 = new Review("TEST BODY 1", "Test Author 1", 4.0);
+        testReview2 = new Review("TEST BODY 2", "Test Author 2", 3.0);
+        testReview3 = new Review("TEST BODY 3", "Test Author 3", 2.0);
 
         testRestaurant.addReview(testReview1);
         testRestaurant.addReview(testReview2);
@@ -35,7 +35,7 @@ public class LibraryTest
     public void testRestaurant()
     {
         assertTrue("Restaurant name should match test name.", testRestaurant.name.equals("TEST RESTAURANT"));
-        assertEquals("Restaurant stars should match test stars.", 2, testRestaurant.stars);
+        assertEquals(3.0, testRestaurant.stars, 0.0);
         assertEquals("Restaurant price category should match test price category.", 3, testRestaurant.priceCategory);
     }
 
@@ -45,20 +45,20 @@ public class LibraryTest
         assertEquals(
                 "Restaurant toString() should match test toString().",
                 "Restaurant name: TEST RESTAURANT\n" +
-                         "Stars: 2\n" +
+                         "Stars: 3.0\n" +
                          "Price Category: 3\n" +
                         "Reviews: [Restaurant name: TEST RESTAURANT\n" +
                         "Review: TEST BODY 1\n" +
                         "Author: Test Author 1\n" +
-                        "Stars: 4\n" +
+                        "Stars: 4.0\n" +
                         ", Restaurant name: TEST RESTAURANT\n" +
                         "Review: TEST BODY 2\n" +
                         "Author: Test Author 2\n" +
-                        "Stars: 3\n" +
+                        "Stars: 3.0\n" +
                         ", Restaurant name: TEST RESTAURANT\n" +
                         "Review: TEST BODY 3\n" +
                         "Author: Test Author 3\n" +
-                        "Stars: 2\n" +
+                        "Stars: 2.0\n" +
                         "]\n",
                          testRestaurant.toString());
     }
@@ -73,24 +73,24 @@ public class LibraryTest
         assertEquals(
                 "Restaurant addReview() should successfully add a new review and update the restaurant's stars.",
                 "Restaurant name: TEST RESTAURANT\n" +
-                        "Stars: 4\n" +
+                        "Stars: 3.25\n" +
                         "Price Category: 3\n" +
                         "Reviews: [Restaurant name: TEST RESTAURANT\n" +
                         "Review: TEST BODY 1\n" +
                         "Author: Test Author 1\n" +
-                        "Stars: 4\n" +
+                        "Stars: 4.0\n" +
                         ", Restaurant name: TEST RESTAURANT\n" +
                         "Review: TEST BODY 2\n" +
                         "Author: Test Author 2\n" +
-                        "Stars: 3\n" +
+                        "Stars: 3.0\n" +
                         ", Restaurant name: TEST RESTAURANT\n" +
                         "Review: TEST BODY 3\n" +
                         "Author: Test Author 3\n" +
-                        "Stars: 2\n" +
+                        "Stars: 2.0\n" +
                         ", Restaurant name: TEST RESTAURANT\n" +
                         "Review: TEST BODY 4\n" +
                         "Author: Test Author 4\n" +
-                        "Stars: 4\n" +
+                        "Stars: 4.0\n" +
                         "]\n",
                 testRestaurant.toString());
     }
@@ -100,7 +100,7 @@ public class LibraryTest
     {
         assertTrue("Review body should match test body.", testReview1.body.equals("TEST BODY 1"));
         assertTrue("Review author should match test author.", testReview1.author.equals("Test Author 1"));
-        assertEquals("Review stars should match test stars.", 4, testReview1.stars);
+        assertEquals(4, testReview1.stars, 0.0);
     }
 
     @Test
@@ -111,7 +111,7 @@ public class LibraryTest
                 "Restaurant name: TEST RESTAURANT\n" +
                         "Review: TEST BODY 1\n" +
                         "Author: Test Author 1\n" +
-                        "Stars: 4\n",
+                        "Stars: 4.0\n",
                 testReview1.toString());
     }
 }

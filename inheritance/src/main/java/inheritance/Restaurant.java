@@ -6,13 +6,13 @@ import java.util.List;
 public class Restaurant
 {
     String name;
-    int stars;
+    double stars;
     int priceCategory;
     List<Review> reviews = new ArrayList<>();
 
     public Restaurant() {}
 
-    public Restaurant(String name, int stars, int priceCategory)
+    public Restaurant(String name, double stars, int priceCategory)
     {
         this.name = name;
         this.stars = stars;
@@ -26,7 +26,7 @@ public class Restaurant
         return name;
     }
 
-    public int getStars()
+    public double getStars()
     {
         return stars;
     }
@@ -43,7 +43,7 @@ public class Restaurant
         this.name = newName;
     }
 
-    public void setStars(int newStars)
+    public void setStars(double newStars)
     {
         this.stars = newStars;
     }
@@ -59,8 +59,19 @@ public class Restaurant
         {
             this.reviews.add(review);
             review.setRestaurant(this);
-            this.stars = review.stars;
+            this.stars = calculateStars();
         }
+    }
+
+    public double calculateStars()
+    {
+        double sum = 0.0;
+
+        for(Review review : reviews)
+        {
+            sum += review.getStars();
+        }
+        return sum/reviews.size();
     }
 
     @Override

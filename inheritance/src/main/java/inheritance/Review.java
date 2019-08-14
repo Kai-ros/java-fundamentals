@@ -4,12 +4,12 @@ public class Review
 {
     String body;
     String author;
-    int stars;
+    double stars;
     Restaurant restaurant;
 
     public Review() {}
 
-    public Review(String body, String author, int stars)
+    public Review(String body, String author, double stars)
     {
         this.body = body;
         this.author = author;
@@ -28,7 +28,7 @@ public class Review
         return author;
     }
 
-    public int getStars()
+    public double getStars()
     {
         return stars;
     }
@@ -50,7 +50,7 @@ public class Review
         this.author = newAuthor;
     }
 
-    public void setStars(int newStars)
+    public void setStars(double newStars)
     {
         this.stars = newStars;
     }
