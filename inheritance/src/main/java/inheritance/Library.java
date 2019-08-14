@@ -3,21 +3,48 @@
  */
 package inheritance;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Library
 {
     public static void main(String[] args)
     {
-        Restaurant testRestaurant = new Restaurant("TEST NAME", 4, 3);
-        Review testReview1 = new Review("TEST", "Test Author", 4);
-        Review testReview2 = new Review("TEST", "Test Author", 4);
-        Review testReview3 = new Review("TEST", "Test Author", 4);
+        Theater theater = new Theater();
+        List<String> testMovieList = new ArrayList<>();
 
-        testRestaurant.addReview(testReview1);
-        testRestaurant.addReview(testReview2);
-        testRestaurant.addReview(testReview3);
+        theater = new Theater("TEST THEATER", testMovieList, 4.0);
 
-        System.out.println(testRestaurant.toString());
-        System.out.println(testReview1.toString());
-        System.out.println(testRestaurant.reviews.toString());
+
+        theater.movieList.add("Movie 1");
+
+        System.out.println(theater.movieList);
+
+        theater.movieList.add("Movie 2");
+        theater.movieList.add("Movie 3");
+        theater.movieList.add("Movie 1");
+
+        System.out.println(theater.movieList);
+
+        theater.movieList.remove("Movie 1");
+
+        System.out.println(theater.movieList);
+
+        theater.removeMovie("Movie 1");
+
+        System.out.println(theater.movieList);
+
+        theater.addMovie("Movie 1");
+        theater.addMovie("Movie 4");
+
+        System.out.println(theater.movieList);
+
+        System.out.println(theater.toString());
+
+        TheaterReview testTheaterReview1 = new TheaterReview("TEST BODY 1", "Test Author 1", 4.0, theater);
+
+        System.out.println(testTheaterReview1.movie);
+
+
     }
 }
