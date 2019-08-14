@@ -3,20 +3,22 @@ package inheritance;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Restaurant
+public class Shop
 {
     String name;
+    String description;
     double stars;
     int priceCategory;
-    List<RestaurantReview> reviews = new ArrayList<>();
+    List<ShopReview> reviews = new ArrayList<>();
 
     // Constructors
 
-    public Restaurant() {}
+    public Shop() {}
 
-    public Restaurant(String name, double stars, int priceCategory)
+    public Shop(String name, String description, double stars, int priceCategory)
     {
         this.name = name;
+        this.description = description;
         this.stars = stars;
         this.priceCategory = priceCategory;
     }
@@ -28,10 +30,12 @@ public class Restaurant
         return name;
     }
 
-    public double getStars()
+    public String getDescription()
     {
-        return stars;
+        return description;
     }
+
+    public double getStars() { return stars;}
 
     public int getPriceCategory()
     {
@@ -45,10 +49,12 @@ public class Restaurant
         this.name = newName;
     }
 
-    public void setStars(double newStars)
+    public void setDescription(String newDescription)
     {
-        this.stars = newStars;
+        this.description = newDescription;
     }
+
+    public void setStars(double newStars) { this.stars = newStars;}
 
     public void setPriceCategory(int newPriceCategory)
     {
@@ -57,12 +63,12 @@ public class Restaurant
 
     // Functionality
 
-    public void addReview(RestaurantReview review)
+    public void addReview(ShopReview review)
     {
         if (!reviews.contains(review))
         {
             this.reviews.add(review);
-            review.setRestaurant(this);
+            review.setShop(this);
             this.stars = calculateStars();
         }
     }
@@ -71,7 +77,7 @@ public class Restaurant
     {
         double sum = 0.0;
 
-        for(RestaurantReview review : reviews)
+        for(ShopReview review : reviews)
         {
             sum += review.getStars();
         }
@@ -84,7 +90,7 @@ public class Restaurant
         StringBuilder outputMessage = new StringBuilder();
 
         outputMessage
-                .append("Restaurant name: ").append(getName()).append("\n")
+                .append("Shop name: ").append(getName()).append("\n")
                 .append("Stars: ").append(getStars()).append("\n")
                 .append("Price Category: ").append(getPriceCategory()).append("\n")
                 .append("Reviews: ").append(this.reviews).append("\n");
@@ -92,8 +98,3 @@ public class Restaurant
         return outputMessage.toString();
     }
 }
-
-// Resources
-// https://www.geeksforgeeks.org/classes-objects-java/
-// https://docs.oracle.com/javase/8/docs/api/java/util/ArrayList.html
-// https://www.w3schools.com/java/java_arraylist.asp

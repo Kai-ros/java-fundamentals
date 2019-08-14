@@ -5,37 +5,44 @@ package inheritance;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.Assert.*;
 
 public class LibraryTest
 {
+    // Restaurant variables
     Restaurant testRestaurant;
-    Review testReview1;
-    Review testReview2;
-    Review testReview3;
+    RestaurantReview testRestaurantReview1;
+    RestaurantReview testRestaurantReview2;
+    RestaurantReview testRestaurantReview3;
 
     @Before
-    public void initializeTestData()
+    public void initializeRestaurantTestData()
     {
         String testName = "TEST RESTAURANT";
-        int testStarsRestaurant = 4;
+        double testStarsRestaurant = 4;
         int testPriceCategory = 3;
         testRestaurant = new Restaurant(testName, testStarsRestaurant, testPriceCategory);
 
-        testReview1 = new Review("TEST BODY 1", "Test Author 1", 4);
-        testReview2 = new Review("TEST BODY 2", "Test Author 2", 3);
-        testReview3 = new Review("TEST BODY 3", "Test Author 3", 2);
+        testRestaurantReview1 = new RestaurantReview("TEST BODY 1", "Test Author 1", 4.0, testRestaurant);
+        testRestaurantReview2 = new RestaurantReview("TEST BODY 2", "Test Author 2", 3.0, testRestaurant);
+        testRestaurantReview3 = new RestaurantReview("TEST BODY 3", "Test Author 3", 2.0, testRestaurant);
 
-        testRestaurant.addReview(testReview1);
-        testRestaurant.addReview(testReview2);
-        testRestaurant.addReview(testReview3);
+        testRestaurant.addReview(testRestaurantReview1);
+        testRestaurant.addReview(testRestaurantReview2);
+        testRestaurant.addReview(testRestaurantReview3);
     }
+
+    // Restaurant tests
 
     @Test
     public void testRestaurant()
     {
         assertTrue("Restaurant name should match test name.", testRestaurant.name.equals("TEST RESTAURANT"));
-        assertEquals("Restaurant stars should match test stars.", 2, testRestaurant.stars);
+        assertEquals(3.0, testRestaurant.stars, 0.0);
         assertEquals("Restaurant price category should match test price category.", 3, testRestaurant.priceCategory);
     }
 
@@ -45,20 +52,20 @@ public class LibraryTest
         assertEquals(
                 "Restaurant toString() should match test toString().",
                 "Restaurant name: TEST RESTAURANT\n" +
-                         "Stars: 2\n" +
+                         "Stars: 3.0\n" +
                          "Price Category: 3\n" +
                         "Reviews: [Restaurant name: TEST RESTAURANT\n" +
                         "Review: TEST BODY 1\n" +
                         "Author: Test Author 1\n" +
-                        "Stars: 4\n" +
+                        "Stars: 4.0\n" +
                         ", Restaurant name: TEST RESTAURANT\n" +
                         "Review: TEST BODY 2\n" +
                         "Author: Test Author 2\n" +
-                        "Stars: 3\n" +
+                        "Stars: 3.0\n" +
                         ", Restaurant name: TEST RESTAURANT\n" +
                         "Review: TEST BODY 3\n" +
                         "Author: Test Author 3\n" +
-                        "Stars: 2\n" +
+                        "Stars: 2.0\n" +
                         "]\n",
                          testRestaurant.toString());
     }
@@ -66,52 +73,358 @@ public class LibraryTest
     @Test
     public void testRestaurant_AddReview()
     {
-        Review testReview4 = new Review("TEST BODY 4", "Test Author 4", 4);
+        RestaurantReview testReview4 = new RestaurantReview("TEST BODY 4", "Test Author 4", 4, testRestaurant);
 
         testRestaurant.addReview(testReview4);
 
         assertEquals(
                 "Restaurant addReview() should successfully add a new review and update the restaurant's stars.",
                 "Restaurant name: TEST RESTAURANT\n" +
-                        "Stars: 4\n" +
+                        "Stars: 3.25\n" +
                         "Price Category: 3\n" +
                         "Reviews: [Restaurant name: TEST RESTAURANT\n" +
                         "Review: TEST BODY 1\n" +
                         "Author: Test Author 1\n" +
-                        "Stars: 4\n" +
+                        "Stars: 4.0\n" +
                         ", Restaurant name: TEST RESTAURANT\n" +
                         "Review: TEST BODY 2\n" +
                         "Author: Test Author 2\n" +
-                        "Stars: 3\n" +
+                        "Stars: 3.0\n" +
                         ", Restaurant name: TEST RESTAURANT\n" +
                         "Review: TEST BODY 3\n" +
                         "Author: Test Author 3\n" +
-                        "Stars: 2\n" +
+                        "Stars: 2.0\n" +
                         ", Restaurant name: TEST RESTAURANT\n" +
                         "Review: TEST BODY 4\n" +
                         "Author: Test Author 4\n" +
-                        "Stars: 4\n" +
+                        "Stars: 4.0\n" +
                         "]\n",
                 testRestaurant.toString());
     }
 
     @Test
-    public void testReview()
+    public void testRestaurantReview()
     {
-        assertTrue("Review body should match test body.", testReview1.body.equals("TEST BODY 1"));
-        assertTrue("Review author should match test author.", testReview1.author.equals("Test Author 1"));
-        assertEquals("Review stars should match test stars.", 4, testReview1.stars);
+        assertTrue("Review body should match test body.", testRestaurantReview1.body.equals("TEST BODY 1"));
+        assertTrue("Review author should match test author.", testRestaurantReview1.author.equals("Test Author 1"));
+        assertEquals(4, testRestaurantReview1.stars, 0.0);
     }
 
     @Test
-    public void testReview_ToString()
+    public void testRestaurantReview_ToString()
     {
         assertEquals(
                 "Review toString() should match test toString().",
                 "Restaurant name: TEST RESTAURANT\n" +
                         "Review: TEST BODY 1\n" +
                         "Author: Test Author 1\n" +
-                        "Stars: 4\n",
-                testReview1.toString());
+                        "Stars: 4.0\n",
+                testRestaurantReview1.toString());
+    }
+
+    // Shop variables
+
+    Shop testShop;
+    ShopReview testShopReview1;
+    ShopReview testShopReview2;
+    ShopReview testShopReview3;
+
+    @Before
+    public void initializeShopTestData()
+    {
+        testShop = new Shop("TEST SHOP", "TEST DESCRIPTION", 4.0, 3);
+
+        testShopReview1 = new ShopReview("TEST BODY 1", "Test Author 1", 4.0, testShop);
+        testShopReview2 = new ShopReview("TEST BODY 2", "Test Author 2", 3.0, testShop);
+        testShopReview3 = new ShopReview("TEST BODY 3", "Test Author 3", 2.0, testShop);
+
+        testShop.addReview(testShopReview1);
+        testShop.addReview(testShopReview2);
+        testShop.addReview(testShopReview3);
+    }
+
+    // Shop tests
+
+    @Test
+    public void testShop()
+    {
+        assertTrue("Shop name should match test name.", testShop.name.equals("TEST SHOP"));
+        assertTrue("Shop name should match test name.", testShop.description.equals("TEST DESCRIPTION"));
+        assertEquals(3.0, testShop.stars, 0.0);
+        assertEquals("Shop price category should match test price category.", 3, testShop.priceCategory);
+    }
+
+    @Test
+    public void testShop_ToString()
+    {
+        assertEquals(
+                "Shop toString() should match test toString().",
+                "Shop name: TEST SHOP\n" +
+                        "Stars: 3.0\n" +
+                        "Price Category: 3\n" +
+                        "Reviews: [Shop name: TEST SHOP\n" +
+                        "Review: TEST BODY 1\n" +
+                        "Author: Test Author 1\n" +
+                        "Stars: 4.0\n" +
+                        ", Shop name: TEST SHOP\n" +
+                        "Review: TEST BODY 2\n" +
+                        "Author: Test Author 2\n" +
+                        "Stars: 3.0\n" +
+                        ", Shop name: TEST SHOP\n" +
+                        "Review: TEST BODY 3\n" +
+                        "Author: Test Author 3\n" +
+                        "Stars: 2.0\n" +
+                        "]\n",
+                testShop.toString());
+    }
+
+    @Test
+    public void testShop_AddReview()
+    {
+        ShopReview testReview4 = new ShopReview("TEST BODY 4", "Test Author 4", 4, testShop);
+
+        testShop.addReview(testReview4);
+
+        assertEquals(
+                "Shop addReview() should successfully add a new review and update the shop's stars.",
+                "Shop name: TEST SHOP\n" +
+                        "Stars: 3.25\n" +
+                        "Price Category: 3\n" +
+                        "Reviews: [Shop name: TEST SHOP\n" +
+                        "Review: TEST BODY 1\n" +
+                        "Author: Test Author 1\n" +
+                        "Stars: 4.0\n" +
+                        ", Shop name: TEST SHOP\n" +
+                        "Review: TEST BODY 2\n" +
+                        "Author: Test Author 2\n" +
+                        "Stars: 3.0\n" +
+                        ", Shop name: TEST SHOP\n" +
+                        "Review: TEST BODY 3\n" +
+                        "Author: Test Author 3\n" +
+                        "Stars: 2.0\n" +
+                        ", Shop name: TEST SHOP\n" +
+                        "Review: TEST BODY 4\n" +
+                        "Author: Test Author 4\n" +
+                        "Stars: 4.0\n" +
+                        "]\n",
+                testShop.toString());
+    }
+
+    @Test
+    public void testShopReview()
+    {
+        assertTrue("Review body should match test body.", testShopReview1.body.equals("TEST BODY 1"));
+        assertTrue("Review author should match test author.", testShopReview1.author.equals("Test Author 1"));
+        assertEquals(4, testShopReview1.stars, 0.0);
+    }
+
+    @Test
+    public void testShopReview_ToString()
+    {
+        assertEquals(
+                "Review toString() should match test toString().",
+                "Shop name: TEST SHOP\n" +
+                        "Review: TEST BODY 1\n" +
+                        "Author: Test Author 1\n" +
+                        "Stars: 4.0\n",
+                testShopReview1.toString());
+    }
+
+    // Theater variables
+
+    Theater testTheater;
+    TheaterReview testTheaterReview1;
+    TheaterReview testTheaterReview2;
+    TheaterReview testTheaterReview3;
+    TheaterReview testTheaterReview4;
+    List<String> testArrayList = new ArrayList<>();
+
+    @Before
+    public void initializeTheaterTestData()
+    {
+        List<String> testMovieList = new ArrayList<>();
+        testTheater = new Theater("TEST THEATER", testMovieList, 4.0);
+
+        testTheater.addMovie("Movie 2");
+        testTheater.addMovie("Movie 3");
+        testTheater.addMovie("Movie 1");
+        testTheater.addMovie("Movie 4");
+
+        testArrayList.add("Movie 2");
+        testArrayList.add("Movie 3");
+        testArrayList.add("Movie 1");
+        testArrayList.add("Movie 4");
+
+        testTheaterReview1 = new TheaterReview("TEST BODY 1", "Test Author 1", 4.0, testTheater);
+        testTheaterReview2 = new TheaterReview("TEST BODY 2", "Test Author 2", 3.0, testTheater);
+        testTheaterReview3 = new TheaterReview("TEST BODY 3", "Test Author 3", 2.0, testTheater);
+        testTheaterReview4 = new TheaterReview("TEST BODY 4", "Test Author 4", 1.0, testTheater, "");
+
+        testTheater.addReview(testTheaterReview1);
+        testTheater.addReview(testTheaterReview2);
+        testTheater.addReview(testTheaterReview3);
+    }
+
+    // Theater tests
+
+    @Test
+    public void testTheater()
+    {
+        assertTrue("Theater name should match test name.", testTheater.name.equals("TEST THEATER"));
+        assertEquals("Movie list should match test movie list.", testArrayList, testTheater.movieList);
+        assertEquals(3.0, testTheater.stars, 0.0);
+    }
+
+    @Test
+    public void testTheater_AddMovie()
+    {
+        testTheater.addMovie("Movie 5");
+
+        assertEquals(
+                "Theater toString() should match test toString().",
+                "Theater name: TEST THEATER\n" +
+                        "Movie List: [Movie 2, Movie 3, Movie 1, Movie 4, Movie 5]\n" +
+                        "Stars: 3.0\n" +
+                        "Reviews: [Theater name: TEST THEATER\n" +
+                        "Review: TEST BODY 1\n" +
+                        "Author: Test Author 1\n" +
+                        "Stars: 4.0\n" +
+                        ", Theater name: TEST THEATER\n" +
+                        "Review: TEST BODY 2\n" +
+                        "Author: Test Author 2\n" +
+                        "Stars: 3.0\n" +
+                        ", Theater name: TEST THEATER\n" +
+                        "Review: TEST BODY 3\n" +
+                        "Author: Test Author 3\n" +
+                        "Stars: 2.0\n" +
+                        "]\n",
+                testTheater.toString());
+    }
+
+    @Test
+    public void testTheater_RemoveMovie()
+    {
+        testTheater.removeMovie("Movie 5");
+
+        assertEquals(
+                "Theater toString() should match test toString().",
+                "Theater name: TEST THEATER\n" +
+                        "Movie List: [Movie 2, Movie 3, Movie 1, Movie 4]\n" +
+                        "Stars: 3.0\n" +
+                        "Reviews: [Theater name: TEST THEATER\n" +
+                        "Review: TEST BODY 1\n" +
+                        "Author: Test Author 1\n" +
+                        "Stars: 4.0\n" +
+                        ", Theater name: TEST THEATER\n" +
+                        "Review: TEST BODY 2\n" +
+                        "Author: Test Author 2\n" +
+                        "Stars: 3.0\n" +
+                        ", Theater name: TEST THEATER\n" +
+                        "Review: TEST BODY 3\n" +
+                        "Author: Test Author 3\n" +
+                        "Stars: 2.0\n" +
+                        "]\n",
+                testTheater.toString());
+    }
+
+    @Test
+    public void testTheater_GetMovie()
+    {
+        assertEquals("Movie list should match test movie list.", "Movie 2", testTheater.getMovie(0));
+    }
+
+    @Test
+    public void testTheater_ToString()
+    {
+        assertEquals(
+                "Theater toString() should match test toString().",
+                "Theater name: TEST THEATER\n" +
+                        "Movie List: [Movie 2, Movie 3, Movie 1, Movie 4]\n" +
+                        "Stars: 3.0\n" +
+                        "Reviews: [Theater name: TEST THEATER\n" +
+                        "Review: TEST BODY 1\n" +
+                        "Author: Test Author 1\n" +
+                        "Stars: 4.0\n" +
+                        ", Theater name: TEST THEATER\n" +
+                        "Review: TEST BODY 2\n" +
+                        "Author: Test Author 2\n" +
+                        "Stars: 3.0\n" +
+                        ", Theater name: TEST THEATER\n" +
+                        "Review: TEST BODY 3\n" +
+                        "Author: Test Author 3\n" +
+                        "Stars: 2.0\n" +
+                        "]\n",
+                testTheater.toString());
+    }
+
+    @Test
+    public void testTheater_AddReview()
+    {
+        TheaterReview testReview4 = new TheaterReview("TEST BODY 4", "Test Author 4", 4, testTheater);
+
+        testTheater.addReview(testReview4);
+
+        assertEquals(
+                "Theater addReview() should successfully add a new review and update the Theater's stars.",
+                "Theater name: TEST THEATER\n" +
+                        "Movie List: [Movie 2, Movie 3, Movie 1, Movie 4]\n" +
+                        "Stars: 3.25\n" +
+                        "Reviews: [Theater name: TEST THEATER\n" +
+                        "Review: TEST BODY 1\n" +
+                        "Author: Test Author 1\n" +
+                        "Stars: 4.0\n" +
+                        ", Theater name: TEST THEATER\n" +
+                        "Review: TEST BODY 2\n" +
+                        "Author: Test Author 2\n" +
+                        "Stars: 3.0\n" +
+                        ", Theater name: TEST THEATER\n" +
+                        "Review: TEST BODY 3\n" +
+                        "Author: Test Author 3\n" +
+                        "Stars: 2.0\n" +
+                        ", Theater name: TEST THEATER\n" +
+                        "Review: TEST BODY 4\n" +
+                        "Author: Test Author 4\n" +
+                        "Stars: 4.0\n" +
+                        "]\n",
+                testTheater.toString());
+    }
+
+    @Test
+    public void testTheaterReview()
+    {
+        assertTrue("Review body should match test body.", testTheaterReview1.body.equals("TEST BODY 1"));
+        assertTrue("Review author should match test author.", testTheaterReview1.author.equals("Test Author 1"));
+        assertEquals(4, testTheaterReview1.stars, 0.0);
+    }
+
+    @Test
+    public void testTheaterReview_GetMovieName()
+    {
+        assertEquals("Movie list should match test movie list.", "Movie 2", testTheater.getMovie(0));
+    }
+
+    @Test
+    public void testTheaterReview_ToStringWorksWithEitherConstructor()
+    {
+        assertEquals(
+                "Review toString() should match test toString().",
+                "Theater name: TEST THEATER\n" +
+                        "Movie name: Movie 2\n" +
+                        "Review: TEST BODY 4\n" +
+                        "Author: Test Author 4\n" +
+                        "Stars: 1.0\n",
+                testTheaterReview4.toString());
+    }
+
+    @Test
+    public void testTheaterReview_ToString()
+    {
+        assertEquals(
+                "Review toString() should match test toString().",
+                "Theater name: TEST THEATER\n" +
+                        "Review: TEST BODY 1\n" +
+                        "Author: Test Author 1\n" +
+                        "Stars: 4.0\n",
+                testTheaterReview1.toString());
     }
 }

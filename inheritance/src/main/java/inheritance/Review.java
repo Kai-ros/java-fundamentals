@@ -2,14 +2,15 @@ package inheritance;
 
 public class Review
 {
-    String body;
-    String author;
-    int stars;
-    Restaurant restaurant;
+    protected String body;
+    protected String author;
+    protected double stars;
+
+    // Constructors
 
     public Review() {}
 
-    public Review(String body, String author, int stars)
+    public Review(String body, String author, double stars)
     {
         this.body = body;
         this.author = author;
@@ -28,14 +29,9 @@ public class Review
         return author;
     }
 
-    public int getStars()
+    public double getStars()
     {
         return stars;
-    }
-
-    public String getRestaurantName()
-    {
-        return restaurant.getName();
     }
 
     // Setters
@@ -50,14 +46,9 @@ public class Review
         this.author = newAuthor;
     }
 
-    public void setStars(int newStars)
+    public void setStars(double newStars)
     {
         this.stars = newStars;
-    }
-
-    public void setRestaurant(Restaurant newRestaurant)
-    {
-        this.restaurant = newRestaurant;
     }
 
     @Override
@@ -66,7 +57,6 @@ public class Review
         StringBuilder outputMessage = new StringBuilder();
 
         outputMessage
-                .append("Restaurant name: ").append(getRestaurantName()).append("\n")
                 .append("Review: ").append(getBody()).append("\n")
                 .append("Author: ").append(getAuthor()).append("\n")
                 .append("Stars: ").append(getStars()).append("\n");
